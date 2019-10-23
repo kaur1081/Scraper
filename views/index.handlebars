@@ -1,0 +1,21 @@
+ {{!-- instructions to scrape articles --}}
+<div>
+    <h1 class="card z-depth-3 center-allign">Read the latest articles from espn News </h1>
+    <div class="row">
+        <div class="col s3"></div>
+        <h5 class=" card z-depth-3 center-allign col s6">Click 'Scrape' to get the latest article</h5>
+    </div>
+</div>
+
+ <div class="row">
+     <div class="col s2"></div>
+     <div class="col s8 left-allign">
+         {{#each article}}
+         <div class="card-panel">
+<h4>{{this.title}}</h4>
+<a href="/readArticle/{{this._id}}" class="waves-effect waves-light btn"id="btnSignUp">Read Article</a>
+
+         </div>
+         {{/each}}
+     </div>
+     </div>
