@@ -1,0 +1,112 @@
+body {
+    background-image: url(/public/assets/images/photo-1497008386681-a7941f08011e.jpg);
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* width: 100vw; */
+}
+
+/* .navbar-toggler-icon {
+    color: white;
+} */
+
+.jumbotron {
+    background-image: url(/public/assets/images/photo-1497008386681-a7941f08011e.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 580px;
+    /* width: 100vw; */
+    color: wheat;
+    /* text-decoration: aqua; */
+    text-shadow: 4px 4px 6px black;;
+}
+.image body {
+    background-image: url(/public/assets/images/photo-1497008386681-a7941f08011e.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 580px;
+}
+
+h1 {
+    font-size: -webkit-xxx-large;
+    text-shadow: 4px 4px 6px black;;
+    margin-top: 200px;
+}
+
+.nav-link,
+.navbar-brand {
+    color: white;
+    
+}
+
+.nav-tab {
+    font-size: unset;
+    margin-top: 10px;
+}
+
+a {
+    color: white;
+    text-decoration: solid;
+    font-size: x-large;
+}
+
+a:hover {
+    color: teal;
+    text-decoration: underline;
+}
+
+.btn {
+    background-color: lightcoral;
+}
+
+.card {
+    /* width: 97.5%; */
+    margin: 10px;
+    align-content: center;
+}
+
+.card-header {
+    background-color: lightcoral;
+    color: white;
+}
+
+/* .card-body {
+    background-image: url(/public/assets/images/photo-1497008386681-a7941f08011e.jpg);
+
+} */
+
+.save .addNote {
+    background-color: teal;
+    float: right;
+    margin-top: 0%;
+}
+
+footer {
+    height: 50px;
+    margin-left: 15px;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+   
+}
+
+.deleteNote {
+	display: inline-block;
+}
+
+.previousNotes {
+    display: inline-block;
+    width: 90%
+}
+
+.modal-header, .modal-footer {
+    background-color: bisque;
+}
+
+.modal-title {
+    color: white;
+}
+
+.modal-body {
+    background-color: lightcoral;
+}
