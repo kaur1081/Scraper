@@ -103,7 +103,7 @@ app.get("/scrape", function(req, res) {
         console.log('///////////////////////////////////////////')
         
       // Create a new Article using the `result` object built from scraping
-    //   newArticle.save(function(err, doc) {
+    //   Article.save(function(err, doc) {
     //     // Log any errors
     //     if (err) {
     //       console.log(err);
