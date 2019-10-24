@@ -5,7 +5,6 @@ $(document).ready(function () {
             method: "GET",
             url: "/scrape",
         }).done(function (data) {
-            console.log(data)
             window.location = "/"
         })
     });

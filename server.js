@@ -6,7 +6,7 @@ var path = require("path");
 
 // Requiring Note and Article models
 var Note = require("./models/Note.js");
-var Article = require("./models/article.js");
+var Article = require("./models/Article.js");
 
 // Scraping tools
 var axios = require("axios");
@@ -83,37 +83,39 @@ app.get("/scrape", function(req, res) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
     // Now, we grab each selector within the views-row tag, and do the following:
-    $(".views-row").each(function(i, element) {
-
-      // Save an empty result object
-      var result = {};
-
-      // Add the title and summary of every link, and save them as properties of the result object
-      result.title = $(this).children(".views-field-title").text();
-      result.author = $(this).children(".views-field-phpcode-1").text();
-      result.summary = $(this).children(".views-field-field-front-page-body-value").text();
-      var link = $(this).children(".views-field-title").find("a").attr("href");           
-      result.link = "http://www.espn.com" + link;
-      console.log('link:', result.link);
-
-      // Using our Article model, create a new entry
-      // This effectively passes the result object to the entry (and the title and link)
-      var newArticle = new Article(result);
-
+    $(".inline-list").each(function(i, element) {
+        
+        // Save an empty result object
+        var result = {};
+        
+        // Add the title and summary of every link, and save them as properties of the result object
+        result.title = $(this).children('li').children("a").attr('title');
+        result.summary = $(this).children('li').children("a").text();
+        var link = $(this).children("li").children("a").attr("href");           
+        result.link = "http://www.espn.com" + link;
+        
+        // Using our Article model, create a new entry
+        // This effectively passes the result object to the entry (and the title and link)
+        var newArticle = {title: result.title};
+        console.log('///////////////////////////////////////////')
+        console.log(newArticle);
+        
+        console.log('///////////////////////////////////////////')
+        
       // Create a new Article using the `result` object built from scraping
-      newArticle.save(function(err, doc) {
-        // Log any errors
-        if (err) {
-          console.log(err);
-        }
-        // Or log the document
-        else {
-          // console.log(doc);
-        }
-      });
+    //   newArticle.save(function(err, doc) {
+    //     // Log any errors
+    //     if (err) {
+    //       console.log(err);
+    //     }
+    //     // Or log the document
+    //     else {
+    //       // console.log(doc);
+    //     }
+    //   });
 
     });
-        res.send("Articles successfully scraped");
+        res.render("home");
   });
 });
 

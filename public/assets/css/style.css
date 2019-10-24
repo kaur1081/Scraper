@@ -1,5 +1,5 @@
 body {
-    background-image: url(/public/assets/images/photo-1497008386681-a7941f08011e.jpg);
+    /* background-image: url('/public/assets/images/photo-1497008386681-a7941f08011e.jpg'); */
 
     background-repeat: no-repeat;
     background-size: cover;
@@ -11,31 +11,33 @@ body {
 } */
 
 .jumbotron {
-    background-image: url(/public/assets/images/photo-1497008386681-a7941f08011e.jpg);
+    background-image: url('/assets/images/photo-1497008386681-a7941f08011e.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+     max-width: 100%;
+     /* height: auto; */
     height: 580px;
     /* width: 100vw; */
     color: wheat;
     /* text-decoration: aqua; */
-    text-shadow: 4px 4px 6px black;;
+    text-shadow: 4px 3px 6px rgb(133, 115, 115);;
 }
-.image body {
-    background-image: url(/public/assets/images/photo-1497008386681-a7941f08011e.jpg);
+/* .image body {
+    background-image: url(assets/images/photo-1497008386681-a7941f08011e.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     height: 580px;
-}
+} */
 
 h1 {
     font-size: -webkit-xxx-large;
-    text-shadow: 4px 4px 6px black;;
+    text-shadow: 4px 4px 6px  rgb(133, 115, 115);
     margin-top: 200px;
 }
 
 .nav-link,
 .navbar-brand {
-    color: white;
+    color: rgb(238, 15, 15);
     
 }
 
