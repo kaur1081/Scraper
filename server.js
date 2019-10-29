@@ -4,10 +4,7 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var path = require("path");
 
-// Requiring Note and Article models
-var Note = require("./models/Note");
-var Article = require("./models/Article");
-
+var models = require("./models");
 // Scraping tools
 var axios = require("axios");
 var cheerio = require("cheerio");
@@ -57,7 +54,7 @@ db.once("open", function() {
 
 //GET requests to render Handlebars pages
 app.get("/", function(req, res) {
-  Article.find({"saved": false}, function(error, data) {
+  models.Article.find({"saved": false}, function(error, data) {
     var hsbObject = {
       article: data
     };
@@ -67,7 +64,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/saved", function(req, res) {
-  Article.find({"saved": true}).populate("notes").exec(function(error, articles) {
+  models.Article.find({"saved": true}).populate("notes").exec(function(error, articles) {
     var hsbObject = {
       article: articles
     };
@@ -82,6 +79,7 @@ app.get("/scrape", function(req, res) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
     // Now, we grab each selector within the views-row tag, and do the following:
+    var holder = [];
     $(".inline-list").each(function(i, element) {
         
         // Save an empty result object
@@ -95,33 +93,20 @@ app.get("/scrape", function(req, res) {
         
         // Using our Article model, create a new entry
         // This effectively passes the result object to the entry (and the title and link)
-        var newArticle = {title: result.title};
-        console.log('///////////////////////////////////////////')
-        console.log(newArticle);
-        
-        console.log('///////////////////////////////////////////')
-        
-      // Create a new Article using the `result` object built from scraping
-    //   Article.save(function(err, doc) {
-    //     // Log any errors
-    //     if (err) {
-    //       console.log(err);
-    //     }
-    //     // Or log the document
-    //     else {
-    //       // console.log(doc);
-    //     }
-    //   });
+        holder.push(result);
+        // Create a new Article using the `result` object built from scraping
 
     });
-        res.render("home");
+    console.log(holder)
+       models.Article.create(holder);
+
   });
 });
 
 // This will get the articles we scraped from the mongoDB
 app.get("/articles", function(req, res) {
   // Grab every doc in the Articles array
-  Article.find({}, function(error, doc) {
+  models.Article.find({}, function(error, doc) {
     // Log any errors
     if (error) {
       console.log(error);
@@ -136,7 +121,7 @@ app.get("/articles", function(req, res) {
 // Grab an article by it's ObjectId
 app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, find the matching query in our db...
-  Article.findOne({ "_id": req.params.id })
+  models.Article.findOne({ "_id": req.params.id })
   // ..and populate all of the notes associated with it
   .populate("note")
   // now, execute our function
@@ -156,7 +141,7 @@ app.get("/articles/:id", function(req, res) {
 // Save an article
 app.post("/articles/save/:id", function(req, res) {
       // Use the article id to find and update its saved boolean
-      Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
+      models.Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
       // Execute the above query
       .exec(function(error, doc) {
         // Log any errors
@@ -173,7 +158,7 @@ app.post("/articles/save/:id", function(req, res) {
 // Delete an article
 app.post("/articles/delete/:id", function(req, res) {
       // Use the article id to find and update its saved boolean
-      Article.findOneAndUpdate({ "_id": req.params.id }, {"saved": false, "notes": []})
+      models.Article.findOneAndUpdate({ "_id": req.params.id }, {"saved": false, "notes": []})
       // Execute the above query
       .exec(function(error, doc) {
         // Log any errors
@@ -205,7 +190,7 @@ app.post("/notes/save/:id", function(req, res) {
     // Otherwise
     else {
       // Use the article id to find and update it's notes
-      Article.findOneAndUpdate({ "_id": req.params.id }, {$push: { "notes": note } })
+      models.Article.findOneAndUpdate({ "_id": req.params.id }, {$push: { "notes": note } })
       // Execute the above query
       .exec(function(error) {
         // Log any errors
@@ -232,7 +217,7 @@ app.delete("/notes/delete/:note_id/:article_id", function(req, res) {
       res.send(error);
     }
     else {
-      Article.findOneAndUpdate({ "_id": req.params.article_id }, {$pull: {"notes": req.params.note_id}})
+      models.Article.findOneAndUpdate({ "_id": req.params.article_id }, {$pull: {"notes": req.params.note_id}})
        // Execute the above query
         .exec(function(error) {
           // Log any errors
