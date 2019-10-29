@@ -39,9 +39,9 @@ app.set("view engine", "handlebars");
 // Database configuration with mongoose
 // mongoose.connect("mongodb://localhost/mongoHeadlines", { useNewUrlParser: true });
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect(MONGODB_URI,{ useNewUrlParser: true });
+// mongoose.connect(MONGODB_URI,{ useNewUrlParser: true });
 var db = mongoose.connection;
 
 // Show any mongoose errors
