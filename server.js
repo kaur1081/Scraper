@@ -5,8 +5,8 @@ var mongoose = require("mongoose");
 var path = require("path");
 
 // Requiring Note and Article models
-var Note = require("./models/Note.js");
-var Article = require("./models/Article.js");
+var Note = require("./models/Note");
+var Article = require("./models/Article");
 
 // Scraping tools
 var axios = require("axios");
@@ -43,7 +43,6 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 
 mongoose.connect(MONGODB_URI,{ useNewUrlParser: true });
 var db = mongoose.connection;
-
 // Show any mongoose errors
 db.on("error", function(error) {
   console.log("Mongoose Error: ", error);
