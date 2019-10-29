@@ -17,6 +17,9 @@
     "url": "https://github.com/kaur1081/newsScraper/issues"
   },
   "homepage": "https://github.com/kaur1081/newsScraper#readme",
+  "engines": {
+    "node": "10.15.3"
+  },
   "dependencies": {
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
