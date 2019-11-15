@@ -101,7 +101,7 @@ app.get("/scrape", function(req, res) {
     });
     console.log(holder)
        models.Article.create(holder);
-
+      res.redirect("/");
   });
 });
 
