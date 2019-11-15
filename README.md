@@ -1,5 +1,5 @@
 # newsScraper
-here my app is to work on scrapping news
+Here my app is to work on scrapping news
 File-Structure
 Package.json includes bodyParser,cheerio, express, handlebars, mongoose, request
 Server.js file includes our routes and node
