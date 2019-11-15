@@ -4,6 +4,7 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var path = require("path");
 
+// req Note and Article models
 var models = require("./models");
 // Scraping tools
 var axios = require("axios");
@@ -15,6 +16,7 @@ var app = express();
 
 // Use morgan and body parser with our app
 app.use(logger("dev"));
+
 app.use(bodyParser.urlencoded({
   extended: false
 }));

@@ -4,9 +4,12 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 // Create article schema
-var articleSchema = new Schema({
+var ArticleSchema = new Schema({
   title: {
-    unique: { index: { unique: true } },
+    type: String,
+    required: true
+  },
+  author: {
     type: String,
     required: true
   },
@@ -21,12 +24,15 @@ var articleSchema = new Schema({
   saved: {
     type: Boolean,
     default: false
-  }
-  
+  },
+  notes: [{
+    type: Schema.Types.ObjectId,
+    ref: "Note"
+  }]
 });
 
 // Create the Article model with the ArticleSchema
-var Article = mongoose.model("Article", articleSchema);
+var Article = mongoose.model("Article", ArticleSchema);
 
 // Export the model
 module.exports = Article;
